@@ -61,10 +61,15 @@ GType value_object_get_type(void);
 /* Utility macro to define the value_object GType structure. */
 G_DEFINE_TYPE(ValueObject, value_object, G_TYPE_OBJECT)
 
-gboolean value_object_control(ValueObject* obj, guint pid,
-                                GError** error);
-gboolean value_object_launch(ValueObject* obj, gchar * process_path,
-                                GError** error);
+gboolean value_object_control(ValueObject* obj,
+                              guint pid,
+                              guint response_time,
+                              GError** error);
+gboolean value_object_launch(ValueObject* obj,
+                             gchar * command,
+                             gchar * args,
+                             guint response_time,
+                             GError** error);
 
 #include "ProcessManager-server-stub.h"
 
@@ -99,33 +104,51 @@ static void value_object_class_init(ValueObjectClass* klass) {
   /* All done. Class is ready to be used for instantiating objects */
 }
 
-gboolean value_object_control(ValueObject* obj, guint pid,
-                                GError** error)
+gboolean value_object_control(ValueObject* obj,
+                              guint pid,
+                              guint response_time,
+                              GError** error)
 {
   g_assert(obj != NULL);
 
   /* Change the value. */
   obj->value1 = pid;
 
-  log("DBUS", "control_process", pid);
-  controller_local_control(pid);
+  log("DBUS", "control_process, pid", pid);
+  log("DBUS", "control_process, response_time ", response_time);
+  controller_local_control(pid, response_time);
 
   /* Return success to GLib/D-Bus wrappers. In this case we don't need
      to touch the supplied error pointer-pointer. */
   return true;
 }
 
-gboolean value_object_launch(ValueObject* obj, gchar * process_path,
-                                GError** error)
+gboolean value_object_launch(ValueObject* obj,
+                             gchar * command,
+                             gchar * args,
+                             guint response_time,
+                             GError** error)
 {
   g_assert(obj != NULL);
+  std::string path;
+  std::string arguments;
 
-  log("DBUS", "launch_process", process_path);
+  path = command;
+  arguments = args;
 
-  std::string s(process_path);
-  controller_local_launch_and_control(s);
+  log("DBUS", "launch_process, path", path);
+  log("DBUS", "launch_process, with arguments", arguments);
+  log("DBUS", "launch_process, response_time ", response_time);
 
-  g_free(process_path);
+  controller_local_launch_and_control(path, arguments, response_time);
+
+  log("DBUS", "launch_process, launched, freeing the command");
+
+  // There is probably a bug in g_free or documentation is wrong.
+  // Who cares about memory leakage?
+  //g_free(command);
+
+  log("DBUS", "launch_process, launched, free done");
 
   return true;
 }
@@ -158,7 +181,7 @@ void dbus_easy_init()
                                                     DBUS_INTERFACE_DBUS);
   if (busProxy == NULL) {
     log("DBUS", "Failed to get a proxy for D-Bus",
-                "Unknown(dbus_g_proxy_new_for_name)");
+        "Unknown(dbus_g_proxy_new_for_name)");
   }
 
   /* Attempt to register the well-known name.
@@ -180,34 +203,34 @@ void dbus_easy_init()
                          /* Where to store the GError. */
                          &error,
                          /* Parameter type of argument 0. Note that
-                          * since we're dealing with GLib/D-Bus
-                          * wrappers, you will need to find a suitable
-                          * GType instead of using the "native" D-Bus
-                          * type codes. */
+                                                 * since we're dealing with GLib/D-Bus
+                                                 * wrappers, you will need to find a suitable
+                                                 * GType instead of using the "native" D-Bus
+                                                 * type codes. */
                          G_TYPE_STRING,
                          /* Data of argument 0. In our case, this is
-                          * the well-known name for our server
-                          * example ("org.maemo.Platdev_ex"). */
+                                                 * the well-known name for our server
+                                                 * example ("org.maemo.Platdev_ex"). */
                          VALUE_SERVICE_NAME,
                          /* Parameter type of argument 1. */
                          G_TYPE_UINT,
                          /* Data of argument 0. This is the "flags"
-                          * argument of the "RequestName" method which
-                          * can be use to specify what the bus service
-                          * should do when the name already exists on
-                          * the bus. We'll go with defaults. */
+                                                 * argument of the "RequestName" method which
+                                                 * can be use to specify what the bus service
+                                                 * should do when the name already exists on
+                                                 * the bus. We'll go with defaults. */
                          0,
                          /* Input arguments are terminated with a
-                          * special GType marker. */
+                                                 * special GType marker. */
                          G_TYPE_INVALID,
                          /* Parameter type of return value 0.
-                          * For "RequestName" it is UINT32 so we pick
-                          * the GType that maps into UINT32 in the
-                          * wrappers. */
+                                                 * For "RequestName" it is UINT32 so we pick
+                                                 * the GType that maps into UINT32 in the
+                                                 * wrappers. */
                          G_TYPE_UINT,
                          /* Data of return value 0. These will always
-                          * be pointers to the locations where the
-                          * proxy can copy the results. */
+                                                 * be pointers to the locations where the
+                                                 * proxy can copy the results. */
                          &result,
                          /* Terminate list of return values. */
                          G_TYPE_INVALID)) {
