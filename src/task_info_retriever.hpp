@@ -1,0 +1,4 @@
+#ifndef TASK_INFO_RETRIEVER_HPP
+#define TASK_INFO_RETRIEVER_HPP
+
+#endif
