@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generato da Microsoft Visio, esportazione SVG overall_scheme.svg Page-1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="8.26772in" height="11.6929in"
+		viewBox="0 0 595.276 841.89" xml:space="preserve" color-interpolation-filters="sRGB" class="st15">
+	<v:documentProperties v:langID="1040" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="msvNoAutoConnect" v:val="VT0(1):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#ebf1df;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st2 {fill:#000000;font-family:Calibri;font-size:0.666664em}
+		.st3 {fill:#fbd7bb;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st4 {marker-end:url(#mrkr4-11);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.25}
+		.st5 {fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:0.3315649867374}
+		.st6 {fill:#dbeef3;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st7 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st8 {fill:#000000;font-family:Calibri;font-size:1.00001em}
+		.st9 {fill:#c4d6a0;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st10 {fill:#92cddc;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st11 {fill:#ccc2d9;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st12 {font-size:1em}
+		.st13 {fill:#ffd965;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st14 {fill:#7f7f7f;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st15 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<defs id="Markers">
+		<g id="lend4">
+			<path d="M 2 1 L 0 0 L 2 -1 L 2 1 " style="stroke:none"/>
+		</g>
+		<marker id="mrkr4-11" class="st5" v:arrowType="4" v:arrowSize="2" v:setback="6.032" refX="-6.032" orient="auto"
+				markerUnits="strokeWidth" overflow="visible">
+			<use xlink:href="#lend4" transform="scale(-3.016,-3.016) "/>
+		</marker>
+	</defs>
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>Pagina 1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<v:layer v:name="Connettore" v:index="0"/>
+		<g id="shape2-1" v:mID="2" v:groupContext="shape" transform="translate(164.835,-428.049)">
+			<title>Casella</title>
+			<desc>Kernel</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="90.2835" cy="802.222" width="180.57" height="79.3346"/>
+			<rect x="0" y="762.555" width="180.567" height="79.3346" class="st1"/>
+			<text x="79.81" y="833.42" class="st2" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/><v:newlineChar/><v:newlineChar/><v:newlineChar/><v:newlineChar/><v:newlineChar/><v:newlineChar/>Kernel</text>		</g>
+		<g id="shape72-4" v:mID="72" v:groupContext="shape" transform="translate(155.906,-523.663)">
+			<title>Casella.72</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<rect x="0" y="749.018" width="198.425" height="92.8719" class="st3"/>
+		</g>
+		<g id="shape64-6" v:mID="64" v:groupContext="shape" v:layerMember="0" transform="translate(248.031,-531.791)">
+			<title>Connettore dinamico.64</title>
+			<path d="M7.09 841.89 L7.09 858.76" class="st4"/>
+		</g>
+		<g id="shape38-12" v:mID="38" v:groupContext="shape" transform="translate(47.4626,-428.049)">
+			<title>Casella.38</title>
+			<desc>Filesystem</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="58.8366" cy="802.222" width="117.68" height="79.3346"/>
+			<rect x="0" y="762.555" width="117.673" height="79.3346" class="st6"/>
+			<text x="41.71" y="833.42" class="st2" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/><v:newlineChar/><v:newlineChar/><v:newlineChar/><v:newlineChar/><v:newlineChar/><v:newlineChar/>Filesystem</text>		</g>
+		<g id="shape31-15" v:mID="31" v:groupContext="shape" transform="translate(257.457,-575.398)">
+			<title>Foglio.31</title>
+			<desc>...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="22.5" cy="827.173" width="45" height="29.4331"/>
+			<rect x="0" y="812.457" width="45" height="29.4331" class="st7"/>
+			<text x="17.96" y="830.77" class="st8" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>...</text>		</g>
+		<g id="shape58-18" v:mID="58" v:groupContext="shape" v:layerMember="0" transform="translate(106.299,-507.384)">
+			<title>Connettore dinamico</title>
+			<path d="M0 841.89 L0 715.45 L79.37 715.45 L79.37 736.9" class="st4"/>
+		</g>
+		<g id="shape59-23" v:mID="59" v:groupContext="shape" v:layerMember="0" transform="translate(127.559,-462.467)">
+			<title>Connettore dinamico.59</title>
+			<path d="M0 841.89 L-21.26 841.89 L-21.26 825.53" class="st4"/>
+		</g>
+		<g id="shape61-28" v:mID="61" v:groupContext="shape" v:layerMember="0" transform="translate(178.583,-575.398)">
+			<title>Connettore dinamico.61</title>
+			<path d="M7.09 841.89 L7.09 848.52" class="st4"/>
+		</g>
+		<g id="shape62-33" v:mID="62" v:groupContext="shape" v:layerMember="0" transform="translate(229.11,-575.398)">
+			<title>Connettore dinamico.62</title>
+			<path d="M7.09 841.89 L7.09 848.52" class="st4"/>
+		</g>
+		<g id="shape63-38" v:mID="63" v:groupContext="shape" v:layerMember="0" transform="translate(316.63,-575.398)">
+			<title>Connettore dinamico.63</title>
+			<path d="M7.09 841.89 L7.09 848.52" class="st4"/>
+		</g>
+		<g id="shape65-43" v:mID="65" v:groupContext="shape" v:layerMember="0" transform="translate(248.031,-498.362)">
+			<title>Connettore dinamico.65</title>
+			<path d="M7.09 841.89 L7.09 852.84" class="st4"/>
+		</g>
+		<g id="shape66-48" v:mID="66" v:groupContext="shape" v:layerMember="0" transform="translate(215.787,-455.38)">
+			<title>Connettore dinamico.66</title>
+			<path d="M-1.63 834.8 L-5 834.8" class="st4"/>
+		</g>
+		<g id="shape67-53" v:mID="67" v:groupContext="shape" v:layerMember="0" transform="translate(106.299,-500.539)">
+			<title>Connettore dinamico.67</title>
+			<path d="M0 841.89 L0 697.55 L129.9 697.55 L129.9 730.06" class="st4"/>
+		</g>
+		<g id="shape68-58" v:mID="68" v:groupContext="shape" v:layerMember="0" transform="translate(106.299,-500.539)">
+			<title>Connettore dinamico.68</title>
+			<path d="M0 841.89 L0 676.29 L217.42 676.29 L217.42 730.06" class="st4"/>
+		</g>
+		<g id="shape1-63" v:mID="1" v:groupContext="shape" transform="translate(214.157,-445.057)">
+			<title>Cerchio</title>
+			<desc>SCHED_DEADLINE</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="40.9606" cy="824.48" width="81.93" height="34.8189"/>
+			<path d="M0 824.48 A40.9606 17.4094 0 0 1 81.92 824.48 A40.9606 17.4094 0 0 1 0 824.48 Z" class="st9"/>
+			<text x="11.68" y="826.88" class="st2" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>SCHED_DEADLINE</text>		</g>
+		<g id="shape39-66" v:mID="39" v:groupContext="shape" transform="translate(55.2579,-486.366)">
+			<title>Casella.39</title>
+			<desc>/proc/sched_deadline/[pid]</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="51.0413" cy="834.803" width="102.09" height="14.1732"/>
+			<rect x="0" y="827.717" width="102.083" height="14.1732" class="st10"/>
+			<text x="6.06" y="837.2" class="st2" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>/proc/sched_deadline/[pid]</text>		</g>
+		<g id="shape37-69" v:mID="37" v:groupContext="shape" transform="translate(127.559,-451.146)">
+			<title>Casella.37</title>
+			<desc>jobTimeViewer</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="37.8425" cy="830.569" width="75.69" height="22.6417"/>
+			<rect x="0" y="819.248" width="75.685" height="22.6417" class="st11"/>
+			<text x="13.2" y="832.97" class="st2" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>jobTimeViewer</text>		</g>
+		<g id="shape12-72" v:mID="12" v:groupContext="shape" transform="translate(164.409,-575.398)">
+			<title>Casella.12</title>
+			<desc>Controller Local</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="21.2598" cy="827.173" width="42.52" height="29.4331"/>
+			<rect x="0" y="812.457" width="42.5197" height="29.4331" class="st10"/>
+			<text x="4.85" y="824.77" class="st2" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>Controller <tspan
+						x="12.94" dy="1.2em" class="st12">Local</tspan></text>		</g>
+		<g id="shape21-76" v:mID="21" v:groupContext="shape" transform="translate(214.937,-575.398)">
+			<title>Casella.21</title>
+			<desc>Controller Local</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="21.2598" cy="827.173" width="42.52" height="29.4331"/>
+			<rect x="0" y="812.457" width="42.5197" height="29.4331" class="st10"/>
+			<text x="4.85" y="824.77" class="st2" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>Controller <tspan
+						x="12.94" dy="1.2em" class="st12">Local</tspan></text>		</g>
+		<g id="shape26-80" v:mID="26" v:groupContext="shape" transform="translate(302.457,-575.398)">
+			<title>Casella.26</title>
+			<desc>Controller Local</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="21.2598" cy="827.173" width="42.52" height="29.4331"/>
+			<rect x="0" y="812.457" width="42.5197" height="29.4331" class="st10"/>
+			<text x="4.85" y="824.77" class="st2" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>Controller <tspan
+						x="12.94" dy="1.2em" class="st12">Local</tspan></text>		</g>
+		<g id="shape3-84" v:mID="3" v:groupContext="shape" transform="translate(164.409,-531.791)">
+			<title>Casella.3</title>
+			<desc>Controller Global</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="90.2835" cy="827.173" width="180.57" height="29.4331"/>
+			<rect x="0" y="812.457" width="180.567" height="29.4331" class="st13"/>
+			<text x="62.49" y="829.57" class="st2" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>Controller Global  </text>		</g>
+		<g id="shape45-87" v:mID="45" v:groupContext="shape" transform="translate(179.655,-552.202)">
+			<title>Casella.45</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<rect x="0" y="832.868" width="12.0295" height="9.02215" class="st14"/>
+		</g>
+		<g id="shape46-89" v:mID="46" v:groupContext="shape" transform="translate(230.182,-552.202)">
+			<title>Casella.46</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<rect x="0" y="832.868" width="12.0295" height="9.02215" class="st14"/>
+		</g>
+		<g id="shape47-91" v:mID="47" v:groupContext="shape" transform="translate(317.702,-552.202)">
+			<title>Casella.47</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<rect x="0" y="832.868" width="12.0295" height="9.02215" class="st14"/>
+		</g>
+		<g id="shape54-93" v:mID="54" v:groupContext="shape" transform="translate(249.103,-498.362)">
+			<title>Casella.54</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<rect x="0" y="832.868" width="12.0295" height="9.02215" class="st14"/>
+		</g>
+	</g>
+</svg>
