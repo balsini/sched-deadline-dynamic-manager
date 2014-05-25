@@ -46,6 +46,8 @@ public:
   }
 };
 
+char ** parse_arguments(const std::string &argsString);
+
 extern MyLogger log;
 
 #endif
