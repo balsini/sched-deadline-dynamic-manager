@@ -3,11 +3,6 @@
   "-//freedesktop//DTD D-Bus Object Introspection 1.0//EN"
   "http://standards.freedesktop.org/dbus/1.0/introspect.dtd">
 
-<!-- The interface name is "org.maemo.Value".
-     One known reference implementation is provided for it by the
-     "/GlobalValue" object found via a well-known name of
-     "org.maemo.Platdev_ex". -->
-
 <node>
   <interface name="core.sched.dl.ProcessManager">
 
@@ -25,11 +20,14 @@
     <!-- setvalue1(int newValue): sets value1 -->
     <method name="control">
       <arg type="u" name="pid" direction="in"/>
+      <arg type="u" name="responseTime" direction="in"/>
     </method>
 
     <!-- setvalue2(double newValue): sets value2 -->
     <method name="launch">
-      <arg type="s" name="process_path" direction="in"/>
+      <arg type="s" name="command" direction="in"/>
+      <arg type="s" name="args" direction="in"/>
+      <arg type="u" name="responseTime" direction="in"/>
     </method>
 
   </interface>
