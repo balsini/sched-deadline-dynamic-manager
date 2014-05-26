@@ -183,7 +183,7 @@ gboolean value_object_fixed_add(ValueObject* obj,
   log("DBUS", "fixed_add, runtime ", runtime);
   log("DBUS", "fixed_add, deadline ", deadline);
   log("DBUS", "fixed_add, period ", period);
-  controller_global_add_fixed(pid, (double)runtime/(double)period);
+  controller_global_add_fixed(pid, runtime, deadline, period);
 
   /* Return success to GLib/D-Bus wrappers. In this case we don't need
      to touch the supplied error pointer-pointer. */

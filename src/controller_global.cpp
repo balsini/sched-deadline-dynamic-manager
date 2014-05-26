@@ -59,15 +59,21 @@ void * controller_global_thread()
 }
 
 void controller_global_add_fixed(pid_t pid,
-                           double U)
+                                 long unsigned int runtime,
+                                 long unsigned int deadline,
+                                 long unsigned int period)
 {
-  taskUtilizationFixed[pid] = U;
+  // Forces the new parameters (why not?)
+  update_dl_parameters(pid, period, deadline, runtime);
+  taskUtilizationFixed[pid] = (double)runtime / (double)period;
 }
 
 void controller_global_add_dynamic(pid_t pid,
-                           double U)
+                                   long unsigned int runtime,
+                                   long unsigned int deadline,
+                                   long unsigned int period)
 {
-  taskUtilizationDynamic[pid] = U;
+  taskUtilizationDynamic[pid] = (double)runtime / (double)period;
 }
 
 void controller_global_launch(const std::string &path,
@@ -91,8 +97,7 @@ void controller_global_launch(const std::string &path,
       exit(1);
       break;
     default: // parent process, pid now contains the child pid
-      update_dl_parameters(pid, period, deadline, runtime);
-      controller_global_add_fixed(pid, (double)runtime/(double)period);
+      controller_global_add_fixed(pid, runtime, deadline, period);
       break;
   }
 }
