@@ -31,6 +31,10 @@
       <arg type="u" name="deadline" direction="in"/>
       <arg type="u" name="period" direction="in"/>
     </method>
+    
+    <method name="xml">
+      <arg type="s" name="path" direction="in"/>
+    </method>
 
   </interface>
 </node>
