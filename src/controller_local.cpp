@@ -38,7 +38,9 @@ void controller_local_control(pid_t pid, long unsigned int response_time)
   thread_vector.push_back(std::thread(controller_local_thread, pid, response_time));
 }
 
-void controller_local_launch_and_control(const std::string &path, const std::string &arguments, long unsigned int response_time)
+void controller_local_launch_and_control(const std::string &path,
+                                         const std::string &arguments,
+                                         long unsigned int response_time)
 {
   pid_t pid;
 

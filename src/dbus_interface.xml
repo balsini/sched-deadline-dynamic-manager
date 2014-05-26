@@ -6,28 +6,30 @@
 <node>
   <interface name="core.sched.dl.ProcessManager">
 
-    <!-- Method definitions -->
-
-    <!--
-    <method name="getvalue1">
-      <arg type="i" name="cur_value" direction="out"/>
-    </method>
-
-    <method name="getvalue2">
-      <arg type="d" name="cur_value" direction="out"/>
-    </method>
-    -->
-    <!-- setvalue1(int newValue): sets value1 -->
     <method name="control">
       <arg type="u" name="pid" direction="in"/>
       <arg type="u" name="responseTime" direction="in"/>
     </method>
 
-    <!-- setvalue2(double newValue): sets value2 -->
     <method name="launch">
       <arg type="s" name="command" direction="in"/>
       <arg type="s" name="args" direction="in"/>
       <arg type="u" name="responseTime" direction="in"/>
+    </method>
+    
+    <method name="fixed_launch">
+      <arg type="s" name="command" direction="in"/>
+      <arg type="s" name="args" direction="in"/>
+      <arg type="u" name="runtime" direction="in"/>
+      <arg type="u" name="deadline" direction="in"/>
+      <arg type="u" name="period" direction="in"/>
+    </method>
+    
+    <method name="fixed_add">
+      <arg type="u" name="pid" direction="in"/>
+      <arg type="u" name="runtime" direction="in"/>
+      <arg type="u" name="deadline" direction="in"/>
+      <arg type="u" name="period" direction="in"/>
     </method>
 
   </interface>
