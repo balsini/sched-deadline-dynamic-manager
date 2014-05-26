@@ -14,6 +14,7 @@ EXECS = sched-deadline-dynamic-manager
 
 interface_xml = dbus_interface.xml
 dbus_headers = ProcessManager-server-stub.h
+pugixmlBin = pugixml.o
 
 SRCS_CPP = \
 	main.cpp util.cpp \
@@ -23,20 +24,24 @@ SRCS_CPP = \
 	task_info_retriever.cpp \
 	dl_syscalls.cpp \
 	request_handler.cpp \
-	dbus_easy.cpp
+	dbus_easy.cpp \
+	xml_manager.cpp
 OBJS_CPP = ${SRCS_CPP:.cpp=.o}
 
-all: $(dbus_headers) $(EXECS)
+all: $(pugixmlBin) $(dbus_headers) $(EXECS)
 
 .cpp.o:
 	$(CPP) $(CXXFLAGS) -c $< $(DBUSINCLUDE)
 
-sched-deadline-dynamic-manager: $(OBJS_CPP)
+sched-deadline-dynamic-manager: $(OBJS_CPP) $(pugixmlBin)
 	$(LD) -o $@ $^ $(LDFLAGS) $(DBUSINCLUDE)
 
 ProcessManager-server-stub.h: $(interface_xml)
 	dbus-binding-tool --prefix=value_object --mode=glib-server $< > $@
 
+pugixml.o: pugixml/src/pugixml.cpp
+	$(CPP) $(CXXFLAGS) -c $<
+	
 checkxml: $(interface_xml)
 	@xmllint --valid --noout $<
 	@echo $< : correct
