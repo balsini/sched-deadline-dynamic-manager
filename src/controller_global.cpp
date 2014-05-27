@@ -1,6 +1,7 @@
 #include "controller_global.hpp"
 #include "util.hpp"
 #include "sched_deadline_mananger.hpp"
+#include "info_retriever.hpp"
 
 #include <map>
 #include <vector>
@@ -34,19 +35,30 @@ void remove_zombies()
 
 inline void controller_global_work()
 {
-
-
   remove_zombies();
 
-  log("controller_global_thread", "Dynamic");
-  for (auto o : taskUtilizationDynamic) {
-    log("controller_global_thread", o.first, o.second);
-  }
+  // Sched deadline bandwidth
+  double B_SD = sched_deadline_bandwidth();
+  // Utilization factor of fixed tasks
+  double U_F = 0.0;
+  // Utilization factor of dynamic tasks
+  double U_D = 0.0;
+
+  log("controller_global_thread", "B_SD", B_SD);
 
   log("controller_global_thread", "Fixed");
   for (auto o : taskUtilizationFixed) {
     log("controller_global_thread", o.first, o.second);
+    U_F += o.second;
   }
+  log("controller_global_thread", "U_F", U_F);
+
+  log("controller_global_thread", "Dynamic");
+  for (auto o : taskUtilizationDynamic) {
+    log("controller_global_thread", o.first, o.second);
+    U_D += o.second;
+  }
+  log("controller_global_thread", "U_D", U_D);
 
 }
 

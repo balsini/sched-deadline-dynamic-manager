@@ -21,7 +21,7 @@ SRCS_CPP = \
 	controller_global.cpp \
 	controller_local.cpp \
 	sched_deadline_mananger.cpp \
-	task_info_retriever.cpp \
+	info_retriever.cpp \
 	dl_syscalls.cpp \
 	request_handler.cpp \
 	dbus_easy.cpp \
