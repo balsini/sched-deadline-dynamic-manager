@@ -19,23 +19,45 @@
 long unsigned int global_controller_period;
 sem_t global_controller_period_mutex;
 
+std::vector<pid_t> tasksToRemove;
 std::map<pid_t, double> taskUtilizationDynamic;
 std::map<pid_t, double> taskUtilizationFixed;
 
-void remove_zombies()
+void clean_task_lists()
 {
-  // Clear up any uncaught dead sub-processes.
-  pid_t pid = waitpid(-1,NULL,WNOHANG);
+  pid_t pid;
+
+  tasksToRemove.clear();
+
+  // Clear forked processes
+  // Withouth these steps, processes
+  // remain zombies
+  pid = waitpid(-1, NULL, WNOHANG);
   while (pid != 0 && pid != -1) {
     taskUtilizationFixed.erase(pid);
     taskUtilizationDynamic.erase(pid);
-    pid = waitpid(-1,NULL,WNOHANG);
+    pid = waitpid(-1, NULL, WNOHANG);
+  }
+
+  for (auto o : taskUtilizationFixed) {
+    if (!task_exists(o.first))
+        tasksToRemove.push_back(o.first);
+  }
+
+  for (auto o : taskUtilizationDynamic) {
+    if (!task_exists(o.first))
+        tasksToRemove.push_back(o.first);
+  }
+
+  for (auto o : tasksToRemove) {
+    taskUtilizationFixed.erase(o);
+    taskUtilizationDynamic.erase(o);
   }
 }
 
 inline void controller_global_work()
 {
-  remove_zombies();
+  clean_task_lists();
 
   // Sched deadline bandwidth
   double B_SD = sched_deadline_bandwidth();
@@ -43,21 +65,24 @@ inline void controller_global_work()
   double U_F = 0.0;
   // Utilization factor of dynamic tasks
   double U_D = 0.0;
-
-  log("controller_global_thread", "B_SD", B_SD);
+  double B_residual; // B_SD - U_F
 
   log("controller_global_thread", "Fixed");
   for (auto o : taskUtilizationFixed) {
     log("controller_global_thread", o.first, o.second);
     U_F += o.second;
   }
-  log("controller_global_thread", "U_F", U_F);
 
   log("controller_global_thread", "Dynamic");
   for (auto o : taskUtilizationDynamic) {
     log("controller_global_thread", o.first, o.second);
     U_D += o.second;
   }
+
+  B_residual = B_SD - U_F;
+  log("controller_global_thread", "B_SD", B_SD);
+  log("controller_global_thread", "B_residual", B_residual);
+  log("controller_global_thread", "U_F", U_F);
   log("controller_global_thread", "U_D", U_D);
 
 }
