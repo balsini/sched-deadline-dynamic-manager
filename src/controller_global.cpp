@@ -3,6 +3,7 @@
 #include "sched_deadline_mananger.hpp"
 
 #include <map>
+#include <vector>
 
 #include <ctime>
 #include <semaphore.h>
@@ -10,6 +11,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <signal.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 
 long unsigned int global_controller_period;
 sem_t global_controller_period_mutex;
@@ -17,17 +21,33 @@ sem_t global_controller_period_mutex;
 std::map<pid_t, double> taskUtilizationDynamic;
 std::map<pid_t, double> taskUtilizationFixed;
 
+void remove_zombies()
+{
+  // Clear up any uncaught dead sub-processes.
+  pid_t pid = waitpid(-1,NULL,WNOHANG);
+  while (pid != 0 && pid != -1) {
+    taskUtilizationFixed.erase(pid);
+    taskUtilizationDynamic.erase(pid);
+    pid = waitpid(-1,NULL,WNOHANG);
+  }
+}
+
 inline void controller_global_work()
 {
+
+
+  remove_zombies();
+
   log("controller_global_thread", "Dynamic");
-  for (auto o : taskUtilizationDynamic)
+  for (auto o : taskUtilizationDynamic) {
     log("controller_global_thread", o.first, o.second);
+  }
 
   log("controller_global_thread", "Fixed");
-  for (auto o : taskUtilizationFixed)
+  for (auto o : taskUtilizationFixed) {
     log("controller_global_thread", o.first, o.second);
+  }
 
-  //log("controller_global_thread", "doing stuff");
 }
 
 void controller_global_init()
