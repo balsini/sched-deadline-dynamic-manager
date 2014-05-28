@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "info_retriever.hpp"
 
 #include <fstream>
@@ -69,10 +67,8 @@ bool task_exists(pid_t pid)
   folder = folder + std::to_string((int)pid);
 
   struct stat st;
-  if(stat(folder.c_str(), &st) == 0) {
-    std::cout << "Folder \"" << folder << "\" exists!" << std::endl;
+  if(stat(folder.c_str(), &st) == 0)
     return true;
-  }
   return false;
 }
 
