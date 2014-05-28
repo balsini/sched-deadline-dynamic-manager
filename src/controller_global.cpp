@@ -19,8 +19,13 @@
 long unsigned int global_controller_period;
 sem_t global_controller_period_mutex;
 
+struct task_attributes {
+  double utilization;
+  double period;
+};
+
 std::vector<pid_t> tasksToRemove;
-std::map<pid_t, double> taskUtilizationDynamic;
+std::map<pid_t, task_attributes> taskInfoDynamic;
 std::map<pid_t, double> taskUtilizationFixed;
 
 void clean_task_lists()
@@ -35,7 +40,7 @@ void clean_task_lists()
   pid = waitpid(-1, NULL, WNOHANG);
   while (pid != 0 && pid != -1) {
     taskUtilizationFixed.erase(pid);
-    taskUtilizationDynamic.erase(pid);
+    taskInfoDynamic.erase(pid);
     pid = waitpid(-1, NULL, WNOHANG);
   }
 
@@ -44,14 +49,14 @@ void clean_task_lists()
         tasksToRemove.push_back(o.first);
   }
 
-  for (auto o : taskUtilizationDynamic) {
+  for (auto o : taskInfoDynamic) {
     if (!task_exists(o.first))
         tasksToRemove.push_back(o.first);
   }
 
   for (auto o : tasksToRemove) {
     taskUtilizationFixed.erase(o);
-    taskUtilizationDynamic.erase(o);
+    taskInfoDynamic.erase(o);
   }
 }
 
@@ -74,9 +79,9 @@ inline void controller_global_work()
   }
 
   log("controller_global_thread", "Dynamic");
-  for (auto o : taskUtilizationDynamic) {
-    log("controller_global_thread", o.first, o.second);
-    U_D += o.second;
+  for (auto o : taskInfoDynamic) {
+    log("controller_global_thread", o.first, o.second.utilization);
+    U_D += o.second.utilization;
   }
 
   B_residual = B_SD - U_F;
@@ -85,6 +90,25 @@ inline void controller_global_work()
   log("controller_global_thread", "U_F", U_F);
   log("controller_global_thread", "U_D", U_D);
 
+  //////////////////////////////////////////////
+  // TODO
+  // Insert control algorithm for dynamic tasks
+  //////////////////////////////////////////////
+
+  if (B_residual < U_D) {
+    // Compress the springs!
+    double T_D_sum = 0.0;
+
+    for (auto o : taskInfoDynamic) {
+      T_D_sum += o.second.period;
+    }
+
+    for (auto o : taskInfoDynamic) {
+      double U_D_i_new = o.second.utilization - (U_D - B_residual) * (o.second.period / T_D_sum);
+      double Runtime_D_i_new = U_D_i_new * o.second.period;
+      update_dl_parameters(o.first, o.second.period, o.second.period, (unsigned long)Runtime_D_i_new);
+    }
+  }
 }
 
 void controller_global_init()
@@ -130,7 +154,8 @@ void controller_global_add_dynamic(pid_t pid,
                                    long unsigned int deadline,
                                    long unsigned int period)
 {
-  taskUtilizationDynamic[pid] = (double)runtime / (double)period;
+  taskInfoDynamic[pid].utilization = (double)runtime / (double)period;
+  taskInfoDynamic[pid].period = (double)period;
 }
 
 void controller_global_launch(const std::string &path,
