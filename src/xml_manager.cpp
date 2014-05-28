@@ -2,6 +2,7 @@
 
 #include <string>
 
+#include "controller_local.hpp"
 #include "controller_global.hpp"
 #include "util.hpp"
 #include "pugixml/src/pugixml.hpp"
@@ -25,15 +26,27 @@ void xml_parse(const std::string &path)
       << "runtime: " << SchedulingAlgorithm.child_value("runtime") << std::endl
       << std::endl;
 
+  std::string algorithm;
   std::string executablePath;
   std::string args;
 
-  executablePath = SchedulingAlgorithm.child_value("path");
-  args = SchedulingAlgorithm.child_value("args");
+  algorithm = SchedulingAlgorithm.attribute("name").value();
 
-  controller_global_launch(executablePath,
-                           args,
-                           atoi(SchedulingAlgorithm.child_value("runtime")),
-                           atoi(SchedulingAlgorithm.child_value("deadline")),
-                           atoi(SchedulingAlgorithm.child_value("period")));
+  if (algorithm == "SCHED_DEADLINE") {
+    executablePath = SchedulingAlgorithm.child_value("path");
+    args = SchedulingAlgorithm.child_value("args");
+
+    controller_global_launch(executablePath,
+                             args,
+                             atoi(SchedulingAlgorithm.child_value("runtime")),
+                             atoi(SchedulingAlgorithm.child_value("deadline")),
+                             atoi(SchedulingAlgorithm.child_value("period")));
+  } else if (algorithm == "QoS_Feedback") {
+    executablePath = SchedulingAlgorithm.child_value("path");
+    args = SchedulingAlgorithm.child_value("args");
+
+    controller_local_launch_and_control(executablePath,
+                                        args,
+                                        atoi(SchedulingAlgorithm.child_value("responsetime")));
+  }
 }
