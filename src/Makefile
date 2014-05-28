@@ -17,7 +17,9 @@ dbus_headers = ProcessManager-server-stub.h
 pugixmlBin = pugixml.o
 
 SRCS_CPP = \
-	main.cpp util.cpp \
+	main.cpp \
+	util.cpp \
+	communication_port.cpp \
 	controller_global.cpp \
 	controller_local.cpp \
 	sched_deadline_mananger.cpp \

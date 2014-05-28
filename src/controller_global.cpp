@@ -2,12 +2,11 @@
 #include "util.hpp"
 #include "sched_deadline_mananger.hpp"
 #include "info_retriever.hpp"
+#include "communication_port.hpp"
 
-#include <map>
 #include <vector>
 
 #include <ctime>
-#include <semaphore.h>
 
 #include <unistd.h>
 #include <string.h>
@@ -19,13 +18,7 @@
 long unsigned int global_controller_period;
 sem_t global_controller_period_mutex;
 
-struct task_attributes {
-  double utilization;
-  double period;
-};
-
 std::vector<pid_t> tasksToRemove;
-std::map<pid_t, task_attributes> taskInfoDynamic;
 std::map<pid_t, double> taskUtilizationFixed;
 
 void clean_task_lists()
@@ -80,8 +73,8 @@ inline void controller_global_work()
 
   log("controller_global_thread", "Dynamic");
   for (auto o : taskInfoDynamic) {
-    log("controller_global_thread", o.first, o.second.utilization);
-    U_D += o.second.utilization;
+    log("controller_global_thread", o.first, o.second.utilization());
+    U_D += o.second.utilization();
   }
 
   B_residual = B_SD - U_F;
@@ -90,23 +83,23 @@ inline void controller_global_work()
   log("controller_global_thread", "U_F", U_F);
   log("controller_global_thread", "U_D", U_D);
 
-  //////////////////////////////////////////////
-  // TODO
-  // Insert control algorithm for dynamic tasks
-  //////////////////////////////////////////////
-
   if (B_residual < U_D) {
     // Compress the springs!
     double T_D_sum = 0.0;
 
     for (auto o : taskInfoDynamic) {
-      T_D_sum += o.second.period;
+      T_D_sum += o.second.period();
     }
 
     for (auto o : taskInfoDynamic) {
-      double U_D_i_new = o.second.utilization - (U_D - B_residual) * (o.second.period / T_D_sum);
-      double Runtime_D_i_new = U_D_i_new * o.second.period;
-      update_dl_parameters(o.first, o.second.period, o.second.period, (unsigned long)Runtime_D_i_new);
+
+      double U_D_i_new = o.second.utilization() - (U_D - B_residual) * (o.second.period() / T_D_sum);
+      double Runtime_D_i_new = U_D_i_new * o.second.period();
+      update_dl_parameters(o.first, o.second.period(), o.second.period(), (unsigned long)Runtime_D_i_new);
+    }
+  } else {
+    for (auto o : taskInfoDynamic) {
+      update_dl_parameters(o.first, o.second.period(), o.second.period(), o.second.runtime());
     }
   }
 }
@@ -115,7 +108,7 @@ void controller_global_init()
 {
   // Mutual exclusion initialization
   sem_init(&global_controller_period_mutex, 0, 1);
-  global_controller_period = 1000000; // 1 sec
+  global_controller_period = 500000; // 1 sec
 }
 
 void * controller_global_thread()
@@ -154,8 +147,8 @@ void controller_global_add_dynamic(pid_t pid,
                                    long unsigned int deadline,
                                    long unsigned int period)
 {
-  taskInfoDynamic[pid].utilization = (double)runtime / (double)period;
-  taskInfoDynamic[pid].period = (double)period;
+  taskInfoDynamic[pid].utilization((double)runtime / (double)period);
+  taskInfoDynamic[pid].period((double)period);
 }
 
 void controller_global_launch(const std::string &path,

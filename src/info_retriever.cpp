@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "info_retriever.hpp"
 
 #include <fstream>
@@ -93,4 +95,29 @@ int cpu_num()
   }
 
   return ret;
+}
+
+void update_task_statistics(pid_t pid,
+                            std::vector<long unsigned int> &statistics,
+                            unsigned int howMuch)
+{
+  std::string path;
+  std::string s;
+  std::ifstream ifs;
+
+  path = "/proc/sched_deadline/";
+  path = path + std::to_string((int)pid);
+
+  ifs.open(path, std::ifstream::in);
+
+  statistics.clear();
+  for (unsigned int i=0; i<howMuch && ifs.good(); ++i) {
+    ifs >> s;
+    ifs >> s;
+    ifs >> s;
+    statistics.push_back(atoi(s.c_str()));
+    ifs >> s;
+  }
+
+  ifs.close();
 }
