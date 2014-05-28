@@ -35,13 +35,11 @@ long int sched_deadline_period_us()
   static long int ret = -1;
 
   if (ret == -1) {
-    if (ret == -1) {
-      std::ifstream ifs;
+    std::ifstream ifs;
 
-      ifs.open("/proc/sys/kernel/sched_rt_period_us", std::ifstream::in);
-      ifs >> ret;
-      ifs.close();
-    }
+    ifs.open("/proc/sys/kernel/sched_rt_period_us", std::ifstream::in);
+    ifs >> ret;
+    ifs.close();
   }
 
   return ret;
@@ -49,7 +47,9 @@ long int sched_deadline_period_us()
 
 double sched_deadline_bandwidth()
 {
-  return (double) sched_deadline_runtime_us() / (double) sched_deadline_period_us();
+  return (double) cpu_num() *
+      sched_deadline_runtime_us() /
+      sched_deadline_period_us();
 }
 
 bool task_exists(pid_t pid)
@@ -74,4 +74,27 @@ bool task_exists(pid_t pid)
     return true;
   }
   return false;
+}
+
+int cpu_num()
+{
+  static int ret = -1;
+
+  if (ret == -1) {
+    std::string s;
+    std::ifstream ifs;
+
+    ifs.open("/proc/cpuinfo", std::ifstream::in);
+
+    ret = 0;
+    while (ifs.good()) {
+      ifs >> s;
+      if (s == "processor")
+        ++ret;
+    }
+
+    ifs.close();
+  }
+
+  return ret;
 }

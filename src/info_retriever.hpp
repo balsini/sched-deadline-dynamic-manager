@@ -7,5 +7,6 @@ long int sched_deadline_runtime_us();
 long int sched_deadline_period_us();
 double sched_deadline_bandwidth();
 bool task_exists(pid_t pid);
+int cpu_num();
 
 #endif
