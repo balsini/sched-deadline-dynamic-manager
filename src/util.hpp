@@ -5,6 +5,23 @@
 #include <mutex>
 #include <string>
 
+/*
+ * This data struct is used to provide a flexible
+ * logging method.
+ * By changing this data structure is possible to define
+ * how to manage the logging
+ */
+extern MyLogger log;
+
+/*
+ * Transforms an argument std::string to the common format:
+ * char * argv[]
+ */
+char ** parse_arguments(const std::string &argsString);
+
+/*
+ * Adds microseconds to a timespec
+ */
 void timespec_add_us(struct timespec * t, long us);
 
 class MyLogger
@@ -44,9 +61,5 @@ public:
     log_mutex.unlock();
   }
 };
-
-char ** parse_arguments(const std::string &argsString);
-
-extern MyLogger log;
 
 #endif
