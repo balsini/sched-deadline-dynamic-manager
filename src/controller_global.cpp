@@ -18,18 +18,23 @@
 long unsigned int global_controller_period;
 sem_t global_controller_period_mutex;
 
+// List of tasks to be removed.
 std::vector<pid_t> tasksToRemove;
+
+// Map of utilization factors of fixed tasks
 std::map<pid_t, double> taskUtilizationFixed;
 
+/*
+ * Clears forked processes.
+ * Withouth these steps, terminated processes
+ * will remain zombies
+ */
 void clean_task_lists()
 {
   pid_t pid;
 
   tasksToRemove.clear();
 
-  // Clear forked processes
-  // Withouth these steps, processes
-  // remain zombies
   pid = waitpid(-1, NULL, WNOHANG);
   while (pid != 0 && pid != -1) {
     taskUtilizationFixed.erase(pid);
