@@ -16,10 +16,12 @@ void xml_parse(const std::string &path)
   std::string args;
   pugi::xml_document doc;
 
-  pugi::xml_node SchedulingAlgorithm = doc.child("SchedulingAlgorithm");
+  pugi::xml_parse_result result;
 
+  result = doc.load_file(path.c_str());
+
+  pugi::xml_node SchedulingAlgorithm = doc.child("SchedulingAlgorithm");
   /*
-  pugi::xml_parse_result result = doc.load_file(path.c_str());
   std::cout
       << "Load result: " << result.description() << std::endl
       << "SchedulingAlgorithm name: " << SchedulingAlgorithm.attribute("name").value() << std::endl
