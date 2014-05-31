@@ -25,7 +25,6 @@ SRCS_CPP = \
 	sched_deadline_mananger.cpp \
 	info_retriever.cpp \
 	dl_syscalls.cpp \
-	request_handler.cpp \
 	dbus_easy.cpp \
 	xml_manager.cpp
 OBJS_CPP = ${SRCS_CPP:.cpp=.o}
