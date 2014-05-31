@@ -7,6 +7,10 @@
 
 extern std::map<pid_t, sched_attr_t> taskMap;
 
+/*
+ * Updates SCHED_DEADLINE patameters of a certain
+ * process with PID pid
+ */
 int update_dl_parameters(pid_t pid,
                          unsigned long int period,
                          unsigned long int deadline,

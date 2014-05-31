@@ -64,10 +64,18 @@ struct sched_attr_t {
   __u64 sched_period;
 };
 
+/*
+ * Updates the SCHED_DEADLINE scheduling parameters
+ * to the task PID, by launching the proper syscall
+ */
 int sched_setattr(pid_t pid,
           const sched_attr_t * attr,
           unsigned int flags);
 
+/*
+ * Gathers the SCHED_DEADLINE scheduling parameters of the
+ * task PID, by launching the proper syscall
+ */
 int sched_getattr(pid_t pid,
           sched_attr_t * attr,
           unsigned int size,
