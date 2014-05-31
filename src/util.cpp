@@ -4,7 +4,6 @@
 #include <ctime>
 
 MyLogger log;
-std::mutex log_mutex;
 
 void timespec_add_us(struct timespec * t, long us)
 {

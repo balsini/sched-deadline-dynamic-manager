@@ -7,10 +7,9 @@
 
 void timespec_add_us(struct timespec * t, long us);
 
-extern std::mutex log_mutex;
-
 class MyLogger
 {
+  std::mutex log_mutex;
 public:
   MyLogger() {}
 

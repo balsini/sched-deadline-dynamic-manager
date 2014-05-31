@@ -11,11 +11,15 @@ void xml_parse(const std::string &path)
 {
   log("parsing file", path);
 
+  std::string algorithm;
+  std::string executablePath;
+  std::string args;
   pugi::xml_document doc;
-  pugi::xml_parse_result result = doc.load_file(path.c_str());
 
   pugi::xml_node SchedulingAlgorithm = doc.child("SchedulingAlgorithm");
 
+  /*
+  pugi::xml_parse_result result = doc.load_file(path.c_str());
   std::cout
       << "Load result: " << result.description() << std::endl
       << "SchedulingAlgorithm name: " << SchedulingAlgorithm.attribute("name").value() << std::endl
@@ -25,10 +29,8 @@ void xml_parse(const std::string &path)
       << "deadline: " << SchedulingAlgorithm.child_value("deadline") << std::endl
       << "runtime: " << SchedulingAlgorithm.child_value("runtime") << std::endl
       << std::endl;
+  */
 
-  std::string algorithm;
-  std::string executablePath;
-  std::string args;
 
   algorithm = SchedulingAlgorithm.attribute("name").value();
 
