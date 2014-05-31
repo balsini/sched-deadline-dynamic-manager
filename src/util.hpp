@@ -6,14 +6,6 @@
 #include <string>
 
 /*
- * This data struct is used to provide a flexible
- * logging method.
- * By changing this data structure is possible to define
- * how to manage the logging
- */
-extern MyLogger log;
-
-/*
  * Transforms an argument std::string to the common format:
  * char * argv[]
  */
@@ -61,5 +53,13 @@ public:
     log_mutex.unlock();
   }
 };
+
+/*
+ * This data struct is used to provide a flexible
+ * logging method.
+ * By changing this data structure is possible to define
+ * how to manage the logging
+ */
+extern MyLogger log;
 
 #endif
