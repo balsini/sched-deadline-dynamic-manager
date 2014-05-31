@@ -8,12 +8,14 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-/*
- * Sched deadline bandwidth is initialized with the same
- * values of sched_rt ones and those can be found in:
- *   /proc/sys/kernel/sched_rt_period_us
- *   /proc/sys/kernel/sched_rt_runtime_us
- */
+/*********************************************************
+ * Sched deadline bandwidth is initialized with the same *
+ * values of sched_rt ones and those can be found in:    *
+ *   /proc/sys/kernel/sched_rt_period_us                 *
+ *   /proc/sys/kernel/sched_rt_runtime_us                *
+ * The bandwidth has to be multiplied with the total     *
+ * number of processors                                  *
+ *********************************************************/
 
 long int sched_deadline_runtime_us()
 {
